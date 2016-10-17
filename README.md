@@ -9,6 +9,7 @@ A couple of the main concerns I am looking to address are:
 ## Current To Dos
 1. Complete lookups of IP Sets and Security Groups, but be sure to only perform the needed lookup(s).
 2. When Security Groups reference IP Sets, recurse into the IP Set to get member addresses.
-3. Incorporate Angular UI
+3. Incorporate Angular UI.
+
 ## Tools
 It is using PHP, AngularJS with UI Bootstrap, and, of course, HTML/CSS.
