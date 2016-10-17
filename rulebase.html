@@ -15,7 +15,7 @@
       <div ng-controller="controller">
 
         <div ng-repeat="section in rulebase.layer3Sections.layer3Sections">
-            <a href="#" ng-model="collapsed" ng-click="collapsed=!collapsed" ng-show="!collapsed"><h3>Section: {{ section.name }}</h3></a>
+            <a href="#" ng-model="collapsed" ng-click="collapsed=!collapsed"><h3>Section: {{ section.name }}</h3></a>
             <div ng-show="collapsed">
                 <table class="table table-hover">
                     <thead>
@@ -127,6 +127,12 @@
         $('[rel="popover"]').popover({ trigger: "hover" });
     });
 */
+
+/***** LEFT OFF
+* 1. Complete lookups of IP Sets and Security Groups, but be sure to only perform the needed lookup(s).
+* 2. When Security Groups reference IP Sets, recurse into the IP Set to get member addresses.
+* 3. Incorporate Angular UI
+******/
 </script>
 <script type="text/ng-template" id="popovertpl.html">
 <div>{{ getSetValues(item.value) }}</div>
