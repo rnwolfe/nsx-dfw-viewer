@@ -5,6 +5,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.2.0.js"></script>
+    <script src="script.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></head>
 
 <body>
@@ -12,150 +13,60 @@
     <div class="container">
       <h1 align="center">NSX Distributed Firewall Rules</h1>
       <div ng-controller="controller">
-
-        <div ng-repeat="section in rulebase.layer3Sections.layer3Sections">
-            <a href="#" ng-model="collapsed" ng-click="collapsed=!collapsed"><h3>Section: {{ section.name }}</h3></a>
-            <div ng-show="collapsed">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Rule Name</th>
-                            <th>Action</th>
-                            <th>Direction</th>
-                            <th>Destinations</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="rule in section.rules" ng-style="if_disabled(rule.disabled)">
-                            <td>{{ rule.name }}</td>
-                            <td>{{ rule.action }}</td>
-                            <td>{{ rule.direction }}</td>
-                            <td>
-                                <div ng-repeat="item in rule.destinations.destinationList">
-                                    <!-- <div ng-show="!( item | objLength(item))"><i>any</i></div> -->
-                                    <!-- ng-init= -->
-                                    <span></span>
-                                    <span ng-init="ips = ( item.type == 'IPSet' ) ? getSetValues(item.value) : 'not ipset';" popover-trigger="'mouseenter'" popover-placement="right" popover-title="{{ item.name }}" uib-popover-template="'popovertpl.html'" popover-append-to-body="true">{{ item.name }}</span> | {{ item.type }} | {{ item.value }}
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <p><input type="text" ng-model="sectionFilter" placeholder="Section Search.." class="form-control" /></p>
+        <div ng-repeat="section in rulebase.layer3Sections.layer3Sections | filter:sectionFilter">
+            <div class="panel panel-default">
+              <div class="panel-heading" ng-model="collapsed" ng-click="collapsed=!collapsed" style="cursor: pointer;"><h4>Section: {{ section.name }}</h4></div>           
+                <div class="panel-body" ng-show="collapsed">
+                    <table class="table table-hover table-striped table-responsive small">
+                        <thead>
+                            <tr>
+                                <th>Rule Name</th>
+                                <th>Action</th>
+                                <th>Direction</th>
+                                <th>Sources</th>
+                                <th>Destinations</th>
+                                <th>Services</th>
+                                <th>Applied to</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="rule in section.rules" ng-style="if_disabled(rule.disabled)">
+                                <td>{{ rule.name }}</td>
+                                <td>{{ rule.action }}</td>
+                                <td>{{ rule.direction }}</td>
+                                <td>
+                                    <div ng-repeat="item in rule.sources.sourceList">
+                                        <span ng-show="item.name" popover-trigger="'mouseenter'" popover-placement="right" popover-title="{{ item.name }}" uib-popover-template="'popovertpl.html'" popover-append-to-body="true">{{ item.name || 'any' }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div ng-repeat="item in rule.destinations.destinationList">
+                                        <span ng-show="item.name" popover-trigger="'mouseenter'" popover-placement="right" popover-title="{{ item.name }}" uib-popover-template="'popovertpl.html'" popover-append-to-body="true">{{ item.name || 'any' }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div ng-repeat="service in rule.services.serviceList">{{ service.name || 'any' }}</div>
+                                </td>
+                                <td>
+                                    <div ng-repeat="appliedTo in rule.appliedToList.appliedToList">{{ appliedTo.name }}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
       </div>
     </div>
   </div>
-  <a tabindex="0" id="popover" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" uib-popover-template="'popovertpl.html'">Dismissible popover</a>
 </body>
 
-<script>
-    var myApp = angular.module('fetch', ['ngAnimate', 'ui.bootstrap', 'ngSanitize']);
-
-    myApp.controller('controller', ['$scope', '$http', function ($scope, $http) {
-        // Query for rulebase
-        $http.get("rulebase_ajax.php")
-            .success(function(data){
-                $scope.rulebase = data;
-                console.log($scope.rulebase);
-            })
-            .error(function() {
-                $scope.rulebase = "error in fetching data";
-            });
-
-        // Query Security Groups
-        $http.get("secgroups_ajax.php")
-            .success(function(data){
-                $scope.groups = data;
-                console.log($scope.groups);
-            })
-            .error(function() {
-                $scope.groups = "error in fetching data";
-            });
-
-        // Query IP Sets
-        $http.get("ipsets_ajax.php")
-            .success(function(data){
-                $scope.ipsets = data;
-                console.log($scope.ipsets);
-            })
-            .error(function() {
-                $scope.ipsets = "error in fetching data";
-            });
-
-        myApp.filter('objLength', function() { return function(object) { return Object.keys(object).length; } });
-
-        // Handle style of disabled objects
-        $scope.if_disabled = function(status) {
-                if(status) { 
-                    $scope.style = { 'color':'lightgrey', 'font-style':'italic' };
-
-                    return $scope.style;
-                }
-            }
-
-        // Filter IPSets by given objectId
-        $scope.getSetValues = function(setId) {
-            $http.get("ajax/ipsetDetails.php?setid=" + setId )
-                .success(function(data) {
-                    console.log(data);
-                    return data;
-                })
-                .error(function() { 
-                    return "error fetching ipset details"; 
-                })
-
-            /*
-            //console.log(setid);
-            var ipSet;
-            angular.forEach( $scope.ipsets, function ( key, value ) {
-                if( key.objectId == setid ) {
-                    //console.log( key.objectId + " == " + setid + "; set = " + key.value);
-                    $ipSet = key.value;
-                }
-            })
-            //return $ipSet.replace(/,/g, "<br />");
-            return $ipSet;
-            */
-        }
-
-        // Convert comma-separated values to an array of items
-        $scope.listToArray = function(values) {
-            $scope.array = values.split(',');
-            console.log($scope.array);
-            return $scope.array;
-        }
-    }]);
-
-/*
-    app.filter('ipSetFilter', [function () {
-     return function (ipsets, setid) {
-         var result;
-
-         angular.forEach(ipsets, function (key, value) {
-             if (key.objectId === setid ) {
-                  result = key.value;
-             }
-         });
-         return result;
-     };
-    }]);
-
-    // Enable tooltips!
-    $(document).ready(function() {
-        //$("body").tooltip({ selector: '[data-toggle=tooltip]' });
-        $('[rel="popover"]').popover({ trigger: "hover" });
-    });
-*/
-
-/***** LEFT OFF
-* 1. Complete lookups of IP Sets and Security Groups, but be sure to only perform the needed lookup(s).
-* 2. When Security Groups reference IP Sets, recurse into the IP Set to get member addresses.
-* 3. Incorporate Angular UI
-******/
-</script>
 <script type="text/ng-template" id="popovertpl.html">
-    <div ng-repeat="ip in ips">{{ ip }}</div>
+    <div ng-init="getContents(item.value, item.type);">
+        <div ng-show="isEmpty(contents)" style="text-align: center;"><img src="img/loading.gif"  width="88" height="58" /></div>
+        <div ng-repeat="item in contents track by $index">{{ item }}</div>
+    </div>
 </script>
 </html>

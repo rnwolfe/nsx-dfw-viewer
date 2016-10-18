@@ -14,13 +14,15 @@ $ipsetId = array();
 	$url = "https://". $nsx_host ."/api/2.0/services/ipset/". $ipsetId;
 	$json = restCall("GET", $url, $nsx_auth, array( "Accept: application/json" ) );
 	$r = json_decode($json);
+	
+	if( isset( $_GET['d'] ) ) {
+		echo "<pre>";
+		var_dump($r);
+		echo "</pre>";		
+	}
+	
+	$contents = json_encode( explode(',', $r->value) );
 
-	$ipSet = json_encode( explode(',', $r->value) );
-
-	 print $ipSet;	
+	 print $contents;	
 }
-/* details of ip set:
-Request:
-GET https://<nsxmgr-ip>/api/2.0/services/ipset/<ipset-id>
-*/
 ?>
