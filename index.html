@@ -1,56 +1,30 @@
-<html ng-app="fetch">
+<html ng-app="myApp">
 <head>
-<title>AngularJS GET request with PHP</title>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
-</head>
+    <title>NSX Policy Playground</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.2.0.js"></script>
+<!--    <script src="script.js"></script> //-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></head>
 
 <body>
-<br>
   <div class="row">
     <div class="container">
-      <h1>Angular $http GET Ajax Call</h1>
-      <div ng-controller="controller">
-      <input type="text" ng-model="searchFilter" class="form-control">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Key</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- <tr ng-repeat="objectId in data | filter:searchFilter">
-                    <td>{{objectId.name}}</td>
-                </tr> //-->
-                <tr ng-repeat="(key, value) in data.policies[1] | filter:searchFilter">
-                    <td>{{ key }}</td>
-                    <td>{{ value }}</td>
-                </tr>
-
-            </tbody>
-        </table>
-      </div>
+      <h1 align="center">NSX Distributed Firewall Rules</h1>
+      <rulebase></rulebase>
     </div>
   </div>
 </body>
 
-<script>
-    var fetch = angular.module('fetch', []);
+<script src="components/rulebase/rulebase.module.js"></script>
+<script src="components/rulebase/rulebase.component.js"></script>
+<script src="app.js"></script>
 
-    fetch.controller('controller', ['$scope', '$http', function ($scope, $http) {
-        $http.get("allpolicies_ajax.php")
-            .success(function(data){
-                $scope.data = data;
-                console.log($scope.data);
-            })
-            .error(function() {
-                $scope.data = "error in fetching data";
-            })
-
-            //alert( $http.get("ajax.php") );
-    }]);
-
+<script type="text/ng-template" id="popovertpl.html">
+    <div ng-init="getContents(item.value, item.type);">
+        <div ng-show="isEmpty(contents)" style="text-align: center;"><img src="img/loading.gif"  width="88" height="58" /></div>
+        <div ng-repeat="item in contents track by $index">{{ item }}</div>
+    </div>
 </script>
-
 </html>

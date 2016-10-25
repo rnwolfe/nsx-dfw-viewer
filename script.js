@@ -1,8 +1,6 @@
-var myApp = angular.module('fetch', ['ngAnimate', 'ui.bootstrap', 'ngSanitize']);
-
 myApp.controller('controller', ['$scope', '$http', function ($scope, $http) {
     // Query for rulebase
-    $http.get("rulebase_ajax.php")
+    $http.get("ajax/rulebase_ajax.php")
         .success(function(data){
             $scope.rulebase = data;
             console.log($scope.rulebase);
@@ -12,7 +10,7 @@ myApp.controller('controller', ['$scope', '$http', function ($scope, $http) {
         });
 
     // Query Security Groups
-    $http.get("secgroups_ajax.php")
+    $http.get("ajax/secgroups_ajax.php")
         .success(function(data){
             $scope.groups = data;
             console.log($scope.groups);
@@ -22,7 +20,7 @@ myApp.controller('controller', ['$scope', '$http', function ($scope, $http) {
         });
 
     // Query IP Sets
-    $http.get("ipsets_ajax.php")
+    $http.get("ajax/ipsets_ajax.php")
         .success(function(data){
             $scope.ipsets = data;
             console.log($scope.ipsets);

@@ -4,8 +4,8 @@ if( ! $_GET['setid'] || ! isset( $_GET['setid']) ) {
 } else {
 
 // get functions
-require_once( "../init.php" );
-require_once( "../functions.php" );
+require_once( "init.php" );
+require_once( "functions.php" );
 
 // initialize var(s)
 $ipsetId = array();

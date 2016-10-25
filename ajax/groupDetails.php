@@ -4,8 +4,8 @@ if( ! $_GET['groupid'] || ! isset( $_GET['groupid']) ) {
 	die("No Group ID provided.");
 } else {
 	// get functions
-	require_once( "../init.php" );
-	require_once( "../functions.php" );
+	require_once( "init.php" );
+	require_once( "functions.php" );
 
 	$addresses = array();
 
