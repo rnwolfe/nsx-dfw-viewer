@@ -1,4 +1,6 @@
 myApp.controller('controller', ['$scope', '$http', function ($scope, $http) {
+/*
+Commented portions already refactored into component style
     // Query for rulebase
     $http.get("ajax/rulebase_ajax.php")
         .success(function(data){
@@ -8,6 +10,17 @@ myApp.controller('controller', ['$scope', '$http', function ($scope, $http) {
         .error(function() {
             $scope.rulebase = "error in fetching data";
         });
+  
+    myApp.filter('objLength', function() { return function(object) { return Object.keys(object).length; } });
+
+    // Handle style of disabled objects
+    $scope.if_disabled = function(status) {
+            if(status) { 
+                $scope.style = { 'color':'lightgrey', 'font-style':'italic' };
+                return $scope.style;
+            }
+        }
+*/
 
     // Query Security Groups
     $http.get("ajax/secgroups_ajax.php")
@@ -29,15 +42,6 @@ myApp.controller('controller', ['$scope', '$http', function ($scope, $http) {
             $scope.ipsets = "error in fetching data";
         });
 
-    myApp.filter('objLength', function() { return function(object) { return Object.keys(object).length; } });
-
-    // Handle style of disabled objects
-    $scope.if_disabled = function(status) {
-            if(status) { 
-                $scope.style = { 'color':'lightgrey', 'font-style':'italic' };
-                return $scope.style;
-            }
-        }
 
     // Filter IPSets by given objectId
     $scope.getSetValues = function(id) {

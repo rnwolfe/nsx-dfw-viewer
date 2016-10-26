@@ -5,9 +5,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.2.0.js"></script>
-<!--    <script src="script.js"></script> //-->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></head>
-
 <body>
   <div class="row">
     <div class="container">
@@ -17,14 +15,12 @@
   </div>
 </body>
 
+<script src="components/field-contents/field-contents.module.js"></script>
+<script src="components/field-contents/field-contents.component.js"></script>
 <script src="components/rulebase/rulebase.module.js"></script>
 <script src="components/rulebase/rulebase.component.js"></script>
+<script src="components/core/core.module.js"></script>
+<script src="components/core/obj-length/obj-length.filter.js"></script>
 <script src="app.js"></script>
 
-<script type="text/ng-template" id="popovertpl.html">
-    <div ng-init="getContents(item.value, item.type);">
-        <div ng-show="isEmpty(contents)" style="text-align: center;"><img src="img/loading.gif"  width="88" height="58" /></div>
-        <div ng-repeat="item in contents track by $index">{{ item }}</div>
-    </div>
-</script>
 </html>

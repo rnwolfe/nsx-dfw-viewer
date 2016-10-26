@@ -17,7 +17,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="rule in section.rules" ng-style="if_disabled(rule.disabled)">
+                            <tr ng-repeat="rule in section.rules" ng-style="rule.disabled ? { 'color':'lightgrey', 'font-style':'italic' } : return;">
                                 <td>{{ rule.name }}</td>
                                 <td>{{ rule.action }}</td>
                                 <td>{{ rule.direction }}</td>

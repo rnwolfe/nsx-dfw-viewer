@@ -5,5 +5,6 @@ angular.module('myApp', [
     'ngAnimate', 
     'ngSanitize',
     'ui.bootstrap',
-    'rulebase'
+    'rulebase',
+    'field-contents'
 ]);
