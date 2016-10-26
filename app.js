@@ -1,10 +1,9 @@
 'use strict';
 
-// Define the `myApp` module
-angular.module('myApp', [
+// Define the `nsxDFWViewer` module
+angular.module('nsxDFWViewer', [
     'ngAnimate', 
     'ngSanitize',
     'ui.bootstrap',
-    'rulebase',
-    'field-contents'
+    'rulebase'
 ]);

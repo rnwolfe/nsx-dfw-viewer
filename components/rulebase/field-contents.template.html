@@ -1,0 +1,4 @@
+<div ng-init="$ctrl.getContents(item.value, item.type);">
+    <div ng-show="$ctrl.isEmpty($ctrl.contents)" style="text-align: center;"><img src="img/loading.gif" width="88" height="58" /></div>
+    <div ng-repeat="item in $ctrl.contents track by $index">{{ item }}</div>
+</div>

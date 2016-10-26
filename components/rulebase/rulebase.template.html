@@ -1,47 +1,54 @@
-      <div>
-        <p><input type="text" ng-model="$ctrl.sectionFilter" placeholder="Section Search.." class="form-control" /></p>
-        <div ng-repeat="section in $ctrl.rulebase.layer3Sections.layer3Sections | filter:$ctrl.sectionFilter">
-            <div class="panel panel-default">
-              <div class="panel-heading" ng-model="collapsed" ng-click="collapsed=!collapsed" style="cursor: pointer;"><h4>Section: {{ section.name }}</h4></div>           
-                <div class="panel-body" ng-show="collapsed">
-                    <table class="table table-hover table-striped table-responsive small">
-                        <thead>
-                            <tr>
-                                <th>Rule Name</th>
-                                <th>Action</th>
-                                <th>Direction</th>
-                                <th>Sources</th>
-                                <th>Destinations</th>
-                                <th>Services</th>
-                                <th>Applied to</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="rule in section.rules" ng-style="rule.disabled ? { 'color':'lightgrey', 'font-style':'italic' } : return;">
-                                <td>{{ rule.name }}</td>
-                                <td>{{ rule.action }}</td>
-                                <td>{{ rule.direction }}</td>
-                                <td>
-                                    <div ng-repeat="item in rule.sources.sourceList">
-                                        <span ng-show="item.name" popover-trigger="'mouseenter'" popover-placement="right" popover-title="{{ item.name }}" uib-popover-template="'popovertpl.html'" popover-append-to-body="true">{{ item.name || 'any' }}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div ng-repeat="item in rule.destinations.destinationList">
-                                        <span ng-show="item.name" popover-trigger="'mouseenter'" popover-placement="right" popover-title="{{ item.name }}" uib-popover-template="'popovertpl.html'" popover-append-to-body="true">{{ item.name || 'any' }}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div ng-repeat="service in rule.services.serviceList">{{ service.name || 'any' }}</div>
-                                </td>
-                                <td>
-                                    <div ng-repeat="appliedTo in rule.appliedToList.appliedToList">{{ appliedTo.name }}</div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+<div>
+<p><input type="text" ng-model="$ctrl.sectionFilter" placeholder="Section Search.." class="form-control" /></p>
+<label><input type="checkbox" ng-model="hide" /> Hide sections with no rules</label>
+<div ng-repeat="section in $ctrl.rulebase.layer3Sections.layer3Sections | filter:$ctrl.sectionFilter" ng-hide="!section.rules.length && hide-empty-sections">
+    <div class="panel panel-default">
+      <div class="panel-heading" ng-model="collapsed" ng-click="collapsed=!collapsed" style="cursor: pointer;"><h4>Section: {{ section.name }}</h4></div>           
+        <div class="panel-body" ng-show="collapsed">
+            <table class="table table-hover table-striped table-responsive small">
+                <thead>
+                    <tr>
+                        <th>Rule Name</th>
+                        <th>Action</th>
+                        <th>Direction</th>
+                        <th>Sources</th>
+                        <th>Destinations</th>
+                        <th>Services</th>
+                        <th>Applied to</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="rule in section.rules" ng-style="rule.disabled ? { 'color':'lightgrey', 'font-style':'italic' } : return;">
+                        <td>{{ rule.name }}</td>
+                        <td>{{ rule.action }}</td>
+                        <td>{{ rule.direction }}</td>
+                        <td>
+                            <div ng-repeat="item in rule.sources.sourceList" ng-show="rule.sources.sourceList.length">
+                                <span popover-trigger="'mouseenter'" popover-popup-delay="500" popover-placement="right" popover-title="{{ item.name }}" uib-popover-template="'components/rulebase/field-contents.template.html'" popover-append-to-body="true">{{ item.name }}</span>
+                            </div>
+                            <div ng-show="!rule.sources.sourceList.length">any</div>
+                        </td>
+                        <td>
+                            <div ng-repeat="item in rule.destinations.destinationList" ng-show="rule.destinations.destinationList.length">
+                                <span popover-trigger="'mouseenter'" popover-popup-delay="500" popover-placement="right" popover-title="{{ item.name }}" uib-popover-template="'components/rulebase/field-contents.template.html'" popover-append-to-body="true">{{ item.name }}</span>
+                            </div>
+                            <div ng-show="!rule.destinations.destinationList.length">any</div>
+                        </td>
+                        <td>
+                            <div ng-repeat="item in rule.services.serviceList" ng-show="rule.services.serviceList.length">
+                                <span popover-trigger="'mouseenter'" popover-popup-delay="500" popover-placement="right" popover-title="{{ item.name }}" uib-popover-template="'components/rulebase/field-contents.template.html'" popover-append-to-body="true">{{ item.name }}</span>
 
-      </div>
+                            </div>
+                            <div ng-show="!rule.services.serviceList.length">any</div>
+                        </td>
+                        <td>
+                            <div ng-repeat="appliedTo in rule.appliedToList.appliedToList">{{ appliedTo.name }}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</div>
