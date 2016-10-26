@@ -8,11 +8,7 @@ A couple of the main concerns I am looking to address are:
 * Speed of use. The NSX interface can become prohibitively slow and the UI can be sticky and perform less than desirably. This interface is much more responsive. 
 
 ## Current To Dos
-1. ~~Complete lookups of IP Sets and Security Groups, but be sure to only perform the needed lookup(s).~~
-2. ~~When Security Groups reference IP Sets, recurse into the IP Set to get member addresses.~~
-3. Incorporate lookup of services and display in popover.
-4. Correctly display "any" in place of empty source, destination, or service fields.
-5. Incorporate Angular UI.
+Please view the [issues](http://git.sdel.force3.com/rwolfe/nsx-firewall-viewer/issues) page to track issues, both [open](http://git.sdel.force3.com/rwolfe/nsx-firewall-viewer/issues?type=all&sort=&state=open) and [closed](http://git.sdel.force3.com/rwolfe/nsx-firewall-viewer/issues?type=all&sort=&state=closed) to keep track of changes.
 
 ## Incorporating into a New NSX Manager
 The tool can be quickly and easily integrated into a new NSX environment by updating the `init.php` file as follows: 
