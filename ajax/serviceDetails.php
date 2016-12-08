@@ -30,6 +30,6 @@ if( ! $_GET['appid'] || ! isset( $_GET['appid']) ) {
 	
 	$services = json_encode( $services );
 
-	 print $services;	
+	print $services;	
 }
 ?>

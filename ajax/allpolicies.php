@@ -1,12 +1,4 @@
 <?php
-//database settings 
-/*
-$connect = mysqli_connect("hostname", "username", "password", "dbname");
-
-$result = mysqli_query($connect, "select * from students");
-
-$data = array();
-*/
 // Error reporting/displaying
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);
@@ -23,5 +15,4 @@ $groupURL = "https://". $nsx_host ."/api/2.0/services/policy/securitypolicy/all"
 $nsxR = restCall("GET", $groupURL, $nsx_auth, array( "Accept: application/json" ) );
 
 print $nsxR;
-// print json_encode($data);
 ?>
