@@ -8,10 +8,3 @@ angular.
 			return Object.keys(object).length; 
 		};
 	});
-
-
-
-
-/*
-myApp.filter('objLength', function() { return function(object) { return Object.keys(object).length; } });
-*/
