@@ -16,5 +16,9 @@ The tool can be quickly and easily integrated into a new NSX environment by upda
 $nsx_host = "10.11.12.13";
 $nsx_auth = base64_encode("adminuser:adminpassword");
 ```
-## Tools
+## Requirements
 It is using PHP, AngularJS with UI Bootstrap, and, of course, HTML/CSS.
+
+## FAQs
+How can I add authentication?
+What are the best ways to secure the applications?
