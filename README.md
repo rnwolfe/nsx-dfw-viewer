@@ -5,11 +5,14 @@ This is simple web application for providing a more accessible web interface for
 2. [Requirements](#requirements)
 3. [Pointing to NSX](#incorporating-into-a-new-nsx-manager)
 4. [Frequently Asked Questions](#frequently-asked-questions-faqs)
+5. [License](#license)
+6. [Feedback](#feedback)
 
 ## Purpose
 A couple of the main concerns I am looking to address are:
 * Easy viewing and manipulation/filtering of large rulebases based on filters or sections.
-* Deeper iteration through nested objects, e.g. a destination object that is a security group which contains an IP Set does not actually show the contents of the IP Set. It just shows the IP Set name that is embedded in the security group. This makes a quick glean of the information nearly impossible in those cases.
+* Deeper iteration through nested objects, e.g. a destination object that is a security group which contains an IP Set does not actually show the contents of the IP Set. The NSX GUI just shows the IP Set name that is embedded in the security group. This makes a quick glean of the information nearly impossible in those cases. This app properly recurses through nested objects. 
+    * *Note: it currently only processes security groups and IP Sets.*
 * Speed of use. The NSX interface can become prohibitively slow and the UI can be sticky and perform less than desirably. This interface is much more responsive. 
 
 ## Requirements
@@ -45,3 +48,7 @@ You can modify the code to accomplish some additional security, but given the NS
 Additionally, the PHP files that hold the NSX IP and credentials are obfuscated from the user by the simple fact that PHP won't be parsed in the browser. Only users with direct access to the files could get that information. In the case that the credentials are retrieved by someone, using a read-only NSX account would prevent anyone from modifying any NSX configurations.
 #### 2. How can I add authentication?
 While authentication could be coded into the application itself, it is recommended to simply use Apache configurations to incorporate authentication. You can configure [simple password-based authentication](https://wiki.apache.org/httpd/PasswordBasicAuth), [LDAP authentication](http://www.held-im-ruhestand.de/software/apache-ldap-active-directory-authentication.html), [certificate-based authentication](https://httpd.apache.org/docs/current/ssl/ssl_howto.html#accesscontrol), and others using Apache configurations.
+## License
+This application is distributed under the [GNU AGPLv3 license](https://www.gnu.org/licenses/agpl-3.0.en.html).
+## Feedback
+Comments, problems, feature requests, and other feedback should be directed to [Ryan Wolfe](mailto:rwolfe@force3.com?subject=NSX DFW Viewer Feedback) at [Force 3](http://force3.com).
