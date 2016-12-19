@@ -51,4 +51,4 @@ While authentication could be coded into the application itself, it is recommend
 ## License
 This application is distributed under the [GNU AGPLv3 license](https://www.gnu.org/licenses/agpl-3.0.en.html).
 ## Feedback
-Comments, problems, feature requests, and other feedback should be directed to [Ryan Wolfe](mailto:rwolfe@force3.com?subject=NSX DFW Viewer Feedback) at [Force 3](http://force3.com).
+Comments, problems, feature requests, and other feedback should be directed to [Ryan Wolfe](mailto:rwolfe@force3.com?subject=NSX DFW Viewer Feedback) (rwolfe@force3.com) at [Force 3](http://force3.com).
