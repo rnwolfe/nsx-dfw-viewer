@@ -35,16 +35,13 @@ $nsx_host = "10.11.12.13";
 $nsx_auth = "YWRtaW51c2VyOmFkbWlucGFzc3dvcmQ=";
 ```
 ## Frequently Asked Questions (FAQs)
-**1. What are the best ways to secure the application?**
-
-You can modify the code to accomplish some additional security, but given the NSX API requires HTTP Basic Auth, the username and password must be base64 encoded. The app is a *read only application*, so no POST API are used. This provides some inherent protection. There are a few ways we can ensure the app isn't used to abuse the system or, vicariously, NSX itself.
+#### 1. What are the best ways to secure the application?
+You can modify the code to accomplish some additional security, but given the NSX API requires HTTP Basic Auth, the username and password must be base64 encoded. The app is a *read only application*. In other words, no REST API POST calls are used. This provides some inherent protection. There are a few ways we can ensure the app isn't used to abuse the system or, vicariously, NSX itself.
 1. Configure the account used for the NSX API for Read Only access using [role-based access control](http://www.routetocloud.com/2014/10/nsx-role-based-access-control/).
 2. Configure [access control for the Apache](https://www.cyberciti.biz/faq/apache-restrict-access-based-on-ip-address-to-selected-directories/) directory to restrict the app from only being accessed by administrators by specifying an administrator subnet, or list of administrator machine IPs.
 3. Using the NSX Distributed Firewall, restrict access to the server that houses this application to only administrator machines.
 3. Configure authentication for the Apache server/directory (see FAQ#2).
 
 Additionally, the PHP files that hold the NSX IP and credentials are obfuscated from the user by the simple fact that PHP won't be parsed in the browser. Only users with direct access to the files could get that information. In the case that the credentials are retrieved by someone, using a read-only NSX account would prevent anyone from modifying any NSX configurations.
-
-**2. How can I add authentication?**
-
+#### 2. How can I add authentication?
 While authentication could be coded into the application itself, it is recommended to simply use Apache configurations to incorporate authentication. You can configure [simple password-based authentication](https://wiki.apache.org/httpd/PasswordBasicAuth), [LDAP authentication](http://www.held-im-ruhestand.de/software/apache-ldap-active-directory-authentication.html), [certificate-based authentication](https://httpd.apache.org/docs/current/ssl/ssl_howto.html#accesscontrol), and others using Apache configurations.
