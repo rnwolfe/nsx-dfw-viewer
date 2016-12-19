@@ -6,7 +6,7 @@ This is simple web application for providing a more accessible web interface for
 3. [Pointing to NSX](#incorporating-into-a-new-nsx-manager)
 4. [Frequently Asked Questions](#frequently-asked-questions-faqs)
 5. [License](#license)
-6. [Feedback](#feedback)
+6. [Feedback & Contact](#feedback)
 
 ## Purpose
 A couple of the main concerns I am looking to address are:
