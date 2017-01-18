@@ -76,4 +76,27 @@ function restCall($method, $url, $auth, $headers = array(), $port = false, $data
 
     return $result;
 }
+
+function checkAuth( $user, $pass ) {
+    if( isset( $user ) && isset( $pass ) ) {
+        $nsx_auth = base64_encode( $user.":".$pass );
+        $url = "https://". $nsx_host ."/api/4.0/firewall/globalroot-0/config";
+        $r = restCall("GET", $url, $nsx_auth, array( "Accept: application/json" ) );
+
+        if( $r ) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+function doAuth() {
+    header('WWW-Authenticate: Basic realm="NSX Viewer"');
+    header('HTTP/1.0 401 Unauthorized');
+    echo 'You must provide valid credentials in order to use this application.';
+    exit;
+}
 ?>
