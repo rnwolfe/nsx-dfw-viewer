@@ -26,6 +26,7 @@ if( ! $_GET['appid'] || ! isset( $_GET['appid']) ) {
 	// get functions
 	require_once( "init.php" );
 	require_once( "functions.php" );
+	require_once( "auth.php" );
 
 	// Initialize array
 	$services = array();

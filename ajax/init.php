@@ -26,5 +26,4 @@ error_reporting(-1);
 
 // Get NSX Security Policy
 $nsx_host = "10.202.10.101";
-$nsx_auth = base64_encode("admin:opendaylight123");
 ?>

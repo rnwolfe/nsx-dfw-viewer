@@ -20,7 +20,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 // functions.php
-function restCall($method, $url, $auth, $headers = array(), $port = false, $data = false)
+function restCall($method, $url, $auth, $headers = array(), $noBody = false, $port = false, $data = false)
 {
     $curl = curl_init();
 
@@ -67,24 +67,31 @@ function restCall($method, $url, $auth, $headers = array(), $port = false, $data
     	// print_r($headers);
     }
 
+    // If $noBody is true, don't request the body in the response. 
+    // Included for instances where just checking the HTTP status code.
+    if( $noBody ) curl_setopt($curl, CURLOPT_NOBODY, true);
+
     $result = curl_exec($curl);
+    $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
     // Error checking..
-    if ($result === false) { die(curl_error($curl)); }
+    if ($result === false) die(curl_error($curl));
 
     curl_close($curl);
+    
+    if ( $httpcode != 200 ) $result = false;
 
     return $result;
 }
 
-function checkAuth( $user, $pass ) {
+function checkAuth( $user, $pass, $nsx_host ) {
     if( isset( $user ) && isset( $pass ) ) {
         $nsx_auth = base64_encode( $user.":".$pass );
         $url = "https://". $nsx_host ."/api/4.0/firewall/globalroot-0/config";
         $r = restCall("GET", $url, $nsx_auth, array( "Accept: application/json" ) );
 
         if( $r ) {
-            return true;
+            return $nsx_auth;
         } else {
             return false;
         }

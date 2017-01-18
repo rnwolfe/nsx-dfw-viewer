@@ -26,6 +26,7 @@ if( ! $_GET['groupid'] || ! isset( $_GET['groupid']) ) {
 	// get functions
 	require_once( "init.php" );
 	require_once( "functions.php" );
+	require_once( "auth.php" );
 
 	$addresses = array();
 

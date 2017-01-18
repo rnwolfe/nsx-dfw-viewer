@@ -19,14 +19,8 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-if ( ! isset( $_SERVER['PHP_AUTH_USER'] ) ) {
-    header('WWW-Authenticate: Basic realm="NSX View"');
-    header('HTTP/1.0 401 Unauthorized');
-    echo 'You must provide credentials in order to use this application.';
-    exit;
-} else {
+if( ! isset( $_SERVER['PHP_AUTH_USER'] ) || ! isset ( $_SERVER['PHP_AUTH_USER'] ) ) doAuth();
 
-    echo "<p>Hello {$_SERVER['PHP_AUTH_USER']}.</p>";
-    echo "<p>You entered {$_SERVER['PHP_AUTH_PW']} as your password.</p>";
-}
+$nsx_auth = checkAuth( $_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'], $nsx_host, true );
+if ( ! $nsx_auth ) doAuth();
 ?>

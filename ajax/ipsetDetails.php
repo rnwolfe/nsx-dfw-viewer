@@ -23,12 +23,13 @@ if( ! $_GET['setid'] || ! isset( $_GET['setid']) ) {
 	die("No Set ID provided.");
 } else {
 
-// get functions
-require_once( "init.php" );
-require_once( "functions.php" );
+	// get functions
+	require_once( "init.php" );
+	require_once( "functions.php" );
+	require_once( "auth.php" );
 
-// initialize var(s)
-$ipsetId = array();
+	// initialize var(s)
+	$ipsetId = array();
 
 	$ipsetId = $_GET['setid'];
 	$url = "https://". $nsx_host ."/api/2.0/services/ipset/". $ipsetId;

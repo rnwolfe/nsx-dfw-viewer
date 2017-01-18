@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // get functions
 require_once( "init.php" );
 require_once( "functions.php" );
+require_once( "auth.php" );
 
 $url = "https://". $nsx_host ."/api/4.0/firewall/globalroot-0/config";
 $r = restCall("GET", $url, $nsx_auth, array( "Accept: application/json" ) );

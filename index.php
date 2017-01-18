@@ -1,4 +1,8 @@
-<?php require_once( "ajax/auth.php" ); ?>
+<?php 
+require_once( "ajax/init.php" ); 
+require_once( "ajax/functions.php" ); 
+require_once( "ajax/auth.php" );
+?>
 <html ng-app="nsxDFWViewer">
 <head>
     <meta charset="utf-8">
