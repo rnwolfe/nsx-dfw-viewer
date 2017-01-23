@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="rule in section.rules" ng-style="rule.disabled ? { 'color':'lightgrey', 'font-style':'italic' } : return;">
+                        <tr ng-repeat="rule in section.rules | filter: $ctrl.sectionFilter" ng-style="rule.disabled ? { 'color':'lightgrey', 'font-style':'italic' } : return;">
                             <td>{{ rule.name }}</td>
                             <td>{{ rule.action }}</td>
                             <td>{{ rule.direction }}</td>
