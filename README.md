@@ -46,11 +46,6 @@ The app is a *read only application*. In other words, no REST API POST/PUT calls
 1. Configure the account used for the NSX API for Read Only access using [role-based access control](http://www.routetocloud.com/2014/10/nsx-role-based-access-control/). In the case that the credentials are retrieved by someone, using a read-only NSX account would prevent anyone from modifying any NSX configurations.
 2. Configure [access control for the Apache](https://www.cyberciti.biz/faq/apache-restrict-access-based-on-ip-address-to-selected-directories/) directory to restrict the app from only being accessed by administrators by specifying an administrator subnet, or list of administrator machine IPs.
 3. Using the NSX Distributed Firewall, restrict access to the server that houses this application to only administrator machines.
-=======
-
-1. Configure the account used for the NSX API for Read Only access using [role-based access control](http://www.routetocloud.com/2014/10/nsx-role-based-access-control/). In the case that the credentials are retrieved by someone, using a read-only NSX account would prevent anyone from modifying any NSX configurations.
-2. Configure [access control for the Apache](https://www.cyberciti.biz/faq/apache-restrict-access-based-on-ip-address-to-selected-directories/) directory to restrict the app from only being accessed by administrators by specifying an administrator subnet, or list of administrator machine IPs.
-3. Using the NSX Distributed Firewall, restrict access to the server that houses this application to only administrator machines.
 
 #### 3. Can I change the authentication source?
 Simply? No. Ultimately? Yes, by coding in your own or using server-based configurations. The app's provided authentication is ultimately relying upon the NSX Manager's authentication configuration. 
