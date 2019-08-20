@@ -52,9 +52,9 @@ The app is a *read only application*. In other words, no REST API POST/PUT calls
 Simply? No. Ultimately? Yes, by coding in your own or using server-based configurations. The app's provided authentication is ultimately relying upon the NSX Manager's authentication configuration. 
 
 ## Additional Information and Demo
-Please refer to a blog post [over on my website](https://www.somewolfe.com/2017/01/30/vmware-nsx-distributed-firewall-dfw-viewer/) has some video demos.
+Please refer to a blog post [over on my website](https://rwolfe.io/2017/01/30/vmware-nsx-distributed-firewall-dfw-viewer/) has some video demos.
 ## License
 This application is distributed under the [GNU AGPLv3 license](https://www.gnu.org/licenses/agpl-3.0.en.html).
 ## Feedback
-Comments, problems, feature requests, and other feedback should be directed to [Ryan Wolfe](mailto:rwolfe@force3.com) at [Force 3](http://force3.com).
+Comments, problems, feature requests, and other feedback should be reported using a GitHub issue.
 
